@@ -36,4 +36,6 @@ export class OrderItem {
 
   @ManyToOne(() => Order, (order) => order.items)
   order: Order;
+
+  item: Promise<Product>;
 }
