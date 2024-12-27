@@ -12,6 +12,7 @@ export class CustomersService {
   ) {}
 
   findAll() {
+    console.log("test");
     return this.customerRepo.find();
   }
 
