@@ -21,7 +21,12 @@ import { OrdersItemService } from './services/orders-item.service';
     ProductsModule,
     TypeOrmModule.forFeature([User, Customer, OrderItem, Order]),
   ],
-  controllers: [CustomerController, UsersController, OrdersController, OrdersItemController],
+  controllers: [
+    CustomerController,
+    UsersController,
+    OrdersController,
+    OrdersItemController,
+  ],
   providers: [CustomersService, UsersService, OrdersService, OrdersItemService],
 })
 export class UsersModule {}

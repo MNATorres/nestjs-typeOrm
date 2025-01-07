@@ -16,8 +16,12 @@ export class OrdersItemService {
   ) {}
 
   async create(data: CreateOrderItemDto) {
-    const order = await this.orderRepo.findOne(data.orderId);
-    const product = await this.productRepo.findOne(data.productId);
+    const order = await this.orderRepo.findOne({
+      where: { id: data.orderId },
+    });
+    const product = await this.productRepo.findOne({
+      where: { id: data.productId },
+    });
     const item = new OrderItem();
     item.order = order;
     item.product = product;

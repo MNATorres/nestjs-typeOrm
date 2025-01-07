@@ -18,7 +18,8 @@ export class OrdersService {
   }
 
   findOne(id: number) {
-    const order = this.ordersRepo.findOne(id , {
+    const order = this.ordersRepo.findOne({
+      where: { id },
       relations: ['items', 'items.product'],
     });
     if (!order) {
@@ -30,16 +31,20 @@ export class OrdersService {
   async create(data: CreateOrderDto) {
     const order = new Order();
     if (data.customerId) {
-      const customer = await this.customerRepo.findOne(data.customerId);
+      const customer = await this.customerRepo.findOne({
+        where: { id: data.customerId },
+      });
       order.customer = customer;
     }
     return this.ordersRepo.save(order);
   }
 
   async update(id: number, changes: UpdateOrderDto) {
-    const order = await this.ordersRepo.findOne(id);
+    const order = await this.ordersRepo.findOne({ where: { id } });
     if (changes.customerId) {
-      const customer = await this.customerRepo.findOne(changes.customerId);
+      const customer = await this.customerRepo.findOne({
+        where: { id: changes.customerId },
+      });
       order.customer = customer;
     }
     return this.ordersRepo.save(order);
